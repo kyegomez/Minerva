@@ -1,16 +1,16 @@
 # [READY FOR TRAINING, help us with the strategy!](https://www.figma.com/file/pfaU8Nhyw0EdXuT6z4Hutw/Minerva-Strategy?type=whiteboard&node-id=0%3A1&t=Tub1wIzaPAXt2i86-1)
 
 # Minerva the MATH LLM from Google
-Minerva is an ancient-themed, state-of-the-art Language and Logic Model (LLM) developed by Google. Inspired by the wisdom of ancient mathematicians and logicians, Minerva combines their timeless insights with the power of modern technology to revolutionize the field of mathematics.
+Minerva is an state-of-the-art Language and Logic Model (LLM) developed by Google. Inspired by the wisdom of advanced mathematicians and logicians, Minerva combines their timeless insights with the power of modern technology to revolutionize the field of mathematics.
 
 ![Minerva Banner](minerva-banner.png)
 
 [Join our Minerva Discord and contribute to this project or explore other mathematical wonders!](https://discord.gg/qUtxnK2NMf)
 
-# Minerva: Unleashing the Secrets of Ancient Mathematics 🏛️🔢
+# Minerva: Unleashing the Secrets of advanced Mathematics 🏛️🔢
 
 <!-- ![Minerva Next Generation Open Source Language Model](/Minerva-banner.png) -->
-Minerva is a groundbreaking language model that pushes the boundaries of mathematical understanding and problem-solving. Designed with an ancient math theme, Minerva embodies the spirit of renowned mathematicians such as Euclid, Pythagoras, and Archimedes. By harnessing their ancient wisdom, Minerva offers unparalleled capabilities in mathematical reasoning and exploration.
+Minerva is a groundbreaking language model that pushes the boundaries of mathematical understanding and problem-solving. Designed with an advanced math theme, Minerva embodies the spirit of renowned mathematicians such as Euclid, Pythagoras, and Archimedes. By harnessing their advanced wisdom, Minerva offers unparalleled capabilities in mathematical reasoning and exploration.
 
 ---
 
@@ -22,9 +22,9 @@ Minerva is a groundbreaking language model that pushes the boundaries of mathema
 
 <div align="center">
 
-[![Share on Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Share%20%40kyegomez/Minerva)](https://twitter.com/intent/tweet?text=Unleash%20the%20power%20of%20Minerva%20-%20the%20ancient-themed%20MATH%20LLM%20from%20Google!&url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva) [![Share on Facebook](https://img.shields.io/badge/Share-%20facebook-blue)](https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva) [![Share on LinkedIn](https://img.shields.io/badge/Share-%20linkedin-blue)](https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&title=&summary=&source=)
+[![Share on Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Share%20%40kyegomez/Minerva)](https://twitter.com/intent/tweet?text=Unleash%20the%20power%20of%20Minerva%20-%20the%20advanced-themed%20MATH%20LLM%20from%20Google!&url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva) [![Share on Facebook](https://img.shields.io/badge/Share-%20facebook-blue)](https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva) [![Share on LinkedIn](https://img.shields.io/badge/Share-%20linkedin-blue)](https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&title=&summary=&source=)
 
-[![Share on Reddit](https://img.shields.io/badge/-Share%20on%20Reddit-orange)](https://www.reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&title=Unleash%20the%20power%20of%20Minerva%20-%20the%20ancient-themed%20MATH%20LLM%20from%20Google!) [![Share on Hacker News](https://img.shields.io/badge/-Share%20on%20Hacker%20News-orange)](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&t=Unleash%20the%20power%20of%20Minerva%20-%20the%20ancient-themed%20MATH%20LLM%20from%20Google!) [![Share on Pinterest](https://img.shields.io/badge/-Share%20on%20Pinterest-red)](https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&media=https%3A%2F%2Fexample.com%2Fimage.jpg&description=Unleash%20the%20power%20of%20Minerva%20-%20the%20ancient-themed%20MATH%20LLM%20from%20Google!) [![Share on WhatsApp](https://img.shields.io/badge/-Share%20on%20WhatsApp-green)](https://api.whatsapp.com/send?text=Unleash%20the%20power%20of%20Minerva%20-%20the%20ancient-themed%20MATH%20LLM%20from%20Google!%20%23Minerva%20%23AI%0A%0Ahttps%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva)
+[![Share on Reddit](https://img.shields.io/badge/-Share%20on%20Reddit-orange)](https://www.reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&title=Unleash%20the%20power%20of%20Minerva%20-%20the%20advanced-themed%20MATH%20LLM%20from%20Google!) [![Share on Hacker News](https://img.shields.io/badge/-Share%20on%20Hacker%20News-orange)](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&t=Unleash%20the%20power%20of%20Minerva%20-%20the%20advanced-themed%20MATH%20LLM%20from%20Google!) [![Share on Pinterest](https://img.shields.io/badge/-Share%20on%20Pinterest-red)](https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva&media=https%3A%2F%2Fexample.com%2Fimage.jpg&description=Unleash%20the%20power%20of%20Minerva%20-%20the%20advanced-themed%20MATH%20LLM%20from%20Google!) [![Share on WhatsApp](https://img.shields.io/badge/-Share%20on%20WhatsApp-green)](https://api.whatsapp.com/send?text=Unleash%20the%20power%20of%20Minerva%20-%20the%20advanced-themed%20MATH%20LLM%20from%20Google!%20%23Minerva%20%23AI%0A%0Ahttps%3A%2F%2Fgithub.com%2Fkyegomez%2FMinerva)
 
 </div>
 
@@ -131,9 +131,9 @@ Please note that the Minerva model is not yet available on the PyTorch Hub, but 
 
 ## Why Minerva? 🌠💡
 
-Minerva sets itself apart with its unique ancient-themed approach, combining the wisdom of ancient mathematicians with modern deep learning techniques. Here are some reasons to choose Minerva:
+Minerva sets itself apart with its unique advanced-themed approach, combining the wisdom of advanced mathematicians with modern deep learning techniques. Here are some reasons to choose Minerva:
 
-- **Efficiency**: Minerva incorporates cutting-edge optimization techniques inspired by ancient mathematical principles, resulting in efficient training and inference.
+- **Efficiency**: Minerva incorporates cutting-edge optimization techniques inspired by advanced mathematical principles, resulting in efficient training and inference.
 
 - **Flexibility**: With its modular design, Minerva can adapt to various mathematical tasks and domains, making it a versatile choice for a wide range of applications.
 
@@ -141,4 +141,4 @@ Minerva sets itself apart with its unique ancient-themed approach, combining the
 
 - **Community-driven**: As an open-source project, Minerva thrives on contributions from the community, fostering collaboration, innovation, and continuous improvement.
 
-Join us on this exciting journey to unlock the secrets of ancient mathematics and revolutionize the way we approach mathematical problem-solving! 🚀🌟
+Join us on this exciting journey to unlock the secrets of advanced mathematics and revolutionize the way we approach mathematical problem-solving! 🚀🌟
