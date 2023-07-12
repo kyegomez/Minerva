@@ -1,4 +1,4 @@
-# [READY FOR TRAINING, help us with the strategy!](https://www.figma.com/file/pfaU8Nhyw0EdXuT6z4Hutw/Minerva-Strategy?type=whiteboard&node-id=0%3A1&t=Tub1wIzaPAXt2i86-1)
+# READY FOR TRAINING
 
 * We need the datasets from the minerva paper
 
