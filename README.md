@@ -1,5 +1,9 @@
 # [READY FOR TRAINING, help us with the strategy!](https://www.figma.com/file/pfaU8Nhyw0EdXuT6z4Hutw/Minerva-Strategy?type=whiteboard&node-id=0%3A1&t=Tub1wIzaPAXt2i86-1)
 
+* We need the datasets from the minerva paper
+
+
+
 # Minerva the MATH LLM from Google
 Minerva is an state-of-the-art Language and Logic Model (LLM) developed by Google. Inspired by the wisdom of advanced mathematicians and logicians, Minerva combines their timeless insights with the power of modern technology to revolutionize the field of mathematics.
 
@@ -102,6 +106,16 @@ Accelerate launch train_distributed_accelerate.py
 ## Dataset Building
 
 To build a custom dataset for Minerva, you can preprocess the data using the `build_dataset.py` script. This script performs tasks such as pre-tokenization, data chunking, and uploading to the Huggingface hub. Here's an example command:
+
+| Dataset | Description |
+|-|-|  
+| Mathematical Web Pages | Web pages containing mathematical expressions in MathJax format, cleaned to preserve math notation|
+| arXiv | 2 million arXiv papers up to Feb 2021, in LaTeX format |
+| General Natural Language Data | Same dataset used to pretrain PaLM models |
+
+The mathematical web pages and arXiv datasets focus on technical and mathematical content. The general natural language data provides a broad coverage of general language.
+
+The paper states the mathematical web pages and arXiv each account for 47.5% of the total data. The remaining 5% is general natural language data which is a subset of what was used for PaLM pretraining.
 
 ```shell
 python
