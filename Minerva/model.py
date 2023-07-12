@@ -7,7 +7,7 @@ from palm_rlhf_pytorch import PaLM
 from transformer import AutoTokenizer
 import bitsandbytes as bnb
 
-from embedding import PositionalEmbedding
+from Minerva.embedding import PositionalEmbedding
 
 class MinervaTokenizer:
     def __init__(self):
