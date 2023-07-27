@@ -2,7 +2,6 @@ import multiprocessing
 import argparse
 from itertools import chain
 from datasets import load_dataset
-from transformers import AutoTokenizer
 from model import PALME_Tokenizer
 import torch
 

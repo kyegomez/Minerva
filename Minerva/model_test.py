@@ -1,5 +1,5 @@
 import torch
-from model import PALME_Tokenizer, PALME
+from model import PALME
 
 # Create a sample text token tensor
 text_tokens = torch.randint(0, 32002, (1, 50), dtype=torch.long)

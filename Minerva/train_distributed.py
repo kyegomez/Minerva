@@ -15,7 +15,6 @@ from torch.distributed.fsdp import (
 
 from accelerate.utils import InitProcessGroupKwargs
 from datasets import concatenate_datasets, load_dataset
-from palm_rlhf_pytorch.palm import PaLM
 from palm_rlhf_pytorch.palm import LayerNorm, ParallelTransformerBlock
 from torch.distributed.algorithms._checkpoint.checkpoint_wrapper import (
     CheckpointImpl, apply_activation_checkpointing, checkpoint_wrapper)
@@ -27,7 +26,7 @@ from torch.distributed.fsdp.wrap import (
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from transformers import (AutoTokenizer, default_data_collator,
+from transformers import (default_data_collator,
                           get_cosine_schedule_with_warmup,
                           get_linear_schedule_with_warmup, set_seed)
 
@@ -77,8 +76,9 @@ def activation_checkpointing(
         accelerator (Accelerator, optional): The Accelerate library accelerator. Defaults to None.
     """
     if accelerator is not None:
-        accelerator.print(f"Using activation checkpointing")
-    check_fn = lambda submodule: isinstance(submodule, ParallelTransformerBlock)
+        accelerator.print("Using activation checkpointing")
+    def check_fn(submodule):
+        return isinstance(submodule, ParallelTransformerBlock)
     non_reentrant_wrapper = partial(
         checkpoint_wrapper,
         offload_to_cpu=offload_to_cpu,
