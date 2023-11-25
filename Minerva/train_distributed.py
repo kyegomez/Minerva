@@ -159,9 +159,8 @@ def fsdp(
         )
     else:
         raise ValueError(
-            "Invalid scheduler_type. Expected 'bf16', 'fp16' or 'fp32', got: {}".format(
-                mp
-            )
+            "Invalid scheduler_type. Expected 'bf16', 'fp16' or 'fp32', got: {}"
+            .format(mp)
         )
 
     if shard_strat == "SHARD_GRAD":
@@ -172,9 +171,8 @@ def fsdp(
         sharding_strat_fsdp = ShardingStrategy.NO_SHARD
     else:
         raise ValueError(
-            "Invalid scheduler_type. Expected 'SHARD_GRAD', 'FULL_SHARD' or 'NO_SHARD', got: {}".format(
-                shard_strat
-            )
+            "Invalid scheduler_type. Expected 'SHARD_GRAD', 'FULL_SHARD' or"
+            " 'NO_SHARD', got: {}".format(shard_strat)
         )
 
     model = FullyShardedDataParallel(
@@ -236,9 +234,8 @@ def get_lr_scheduler_with_warmup(
         )
     else:
         raise ValueError(
-            "Invalid scheduler_type. Expected 'linear' or 'cosine', got: {}".format(
-                scheduler_type
-            )
+            "Invalid scheduler_type. Expected 'linear' or 'cosine', got: {}"
+            .format(scheduler_type)
         )
 
 
@@ -374,9 +371,8 @@ def decoupled_optimizer(
         )
     else:
         raise ValueError(
-            "Invalid optimizer_type. Expected 'lion', 'adamw', 'deepspeed' or 'stable_adamw', got: {}".format(
-                optimizer_type
-            )
+            "Invalid optimizer_type. Expected 'lion', 'adamw', 'deepspeed' or"
+            " 'stable_adamw', got: {}".format(optimizer_type)
         )
 
     # Return the optimizer.
@@ -401,7 +397,9 @@ def build_dataloaders():
     ]
 
     tokenized_dataset = dataset.map(
-        lambda example: tokenizer([t + tokenizer.eos_token for t in example["text"]]),
+        lambda example: tokenizer(
+            [t + tokenizer.eos_token for t in example["text"]]
+        ),
         batched=True,
         num_proc=CFG.NUM_CPU,
         remove_columns=remove_columns,
@@ -412,7 +410,9 @@ def build_dataloaders():
     # Main data processing function that will concatenate all texts from our dataset and generate chunks of block_size.
     def group_texts(examples):
         # Concatenate all texts.
-        concatenated_examples = {k: list(chain(*examples[k])) for k in examples.keys()}
+        concatenated_examples = {
+            k: list(chain(*examples[k])) for k in examples.keys()
+        }
         total_length = len(concatenated_examples[list(examples.keys())[0]])
         # We drop the small remainder, we could add padding if the model supported it instead of this drop, you can
         # customize this part to your needs.
@@ -420,7 +420,10 @@ def build_dataloaders():
             total_length = (total_length // block_size) * block_size
         # Split by chunks of max_len.
         result = {
-            k: [t[i : i + block_size] for i in range(0, total_length, block_size)]
+            k: [
+                t[i : i + block_size]
+                for i in range(0, total_length, block_size)
+            ]
             for k, t in concatenated_examples.items()
         }
         return result
@@ -436,11 +439,21 @@ def build_dataloaders():
 
 # doesn't work
 def build_pre_tokenized():
-    d0 = load_dataset("conceptofmind/c4_0-to-20_neox_with_eos_8k", split="train")
-    d1 = load_dataset("conceptofmind/c4_21-to-40_neox_with_eos_8k", split="train")
-    d2 = load_dataset("conceptofmind/c4_41-to-60_neox_with_eos_8k", split="train")
-    d3 = load_dataset("conceptofmind/c4_61-to-80_neox_with_eos_8k", split="train")
-    d4 = load_dataset("conceptofmind/c4_81-to-100_neox_with_eos_8k", split="train")
+    d0 = load_dataset(
+        "conceptofmind/c4_0-to-20_neox_with_eos_8k", split="train"
+    )
+    d1 = load_dataset(
+        "conceptofmind/c4_21-to-40_neox_with_eos_8k", split="train"
+    )
+    d2 = load_dataset(
+        "conceptofmind/c4_41-to-60_neox_with_eos_8k", split="train"
+    )
+    d3 = load_dataset(
+        "conceptofmind/c4_61-to-80_neox_with_eos_8k", split="train"
+    )
+    d4 = load_dataset(
+        "conceptofmind/c4_81-to-100_neox_with_eos_8k", split="train"
+    )
     train_dataset = concatenate_datasets([d0, d1, d2, d3, d4])
     return train_dataset
 
@@ -522,7 +535,9 @@ def main():
 
     # Determine number of training steps
 
-    max_train_steps = math.ceil(len(train_loader) / CFG.GRADIENT_ACCUMULATE_EVERY)
+    max_train_steps = math.ceil(
+        len(train_loader) / CFG.GRADIENT_ACCUMULATE_EVERY
+    )
     accelerator.print(f"Max train steps: {max_train_steps}")
 
     # lr scheduler
@@ -550,13 +565,17 @@ def main():
 
     # I do not know why Huggingface recommends recalculation of max_train_steps
 
-    max_train_steps = math.ceil(len(train_loader) / CFG.GRADIENT_ACCUMULATE_EVERY)
+    max_train_steps = math.ceil(
+        len(train_loader) / CFG.GRADIENT_ACCUMULATE_EVERY
+    )
     accelerator.print(f"Max train steps recalculated: {max_train_steps}")
 
     # Total batch size for logging
 
     total_batch_size = (
-        CFG.BATCH_SIZE * accelerator.num_processes * CFG.GRADIENT_ACCUMULATE_EVERY
+        CFG.BATCH_SIZE
+        * accelerator.num_processes
+        * CFG.GRADIENT_ACCUMULATE_EVERY
     )
     accelerator.print(f"Total batch size: {total_batch_size}")
 
@@ -568,8 +587,13 @@ def main():
     completed_steps = 0
 
     if CFG.RESUME_FROM_CHECKPOINT:
-        if CFG.RESUME_FROM_CHECKPOINT is not None or CFG.RESUME_FROM_CHECKPOINT != "":
-            accelerator.print(f"Resuming from checkpoint {CFG.RESUME_FROM_CHECKPOINT}")
+        if (
+            CFG.RESUME_FROM_CHECKPOINT is not None
+            or CFG.RESUME_FROM_CHECKPOINT != ""
+        ):
+            accelerator.print(
+                f"Resuming from checkpoint {CFG.RESUME_FROM_CHECKPOINT}"
+            )
             accelerator.load_state(CFG.RESUME_FROM_CHECKPOINT)
             path = os.path.basename(CFG.RESUME_FROM_CHECKPOINT)
         training_difference = os.path.splitext(path)[0]
@@ -630,7 +654,8 @@ def main():
         unwrapped_model = accelerator.unwrap_model(model)
         with accelerator.main_process_first():
             accelerator.save(
-                unwrapped_model.state_dict(), f"{CFG.OUTPUT_DIR}/final/final_model.pt"
+                unwrapped_model.state_dict(),
+                f"{CFG.OUTPUT_DIR}/final/final_model.pt",
             )
 
 

@@ -1,7 +1,3 @@
-![Minerva Banner](minerva-banner.png)
-
-[Join our Minerva Discord and contribute to this project or explore other mathematical wonders!](https://discord.gg/qUtxnK2NMf)
-
 # Minerva: Unleashing the Secrets of advanced Mathematics 🏛️🔢
 
 <!-- ![Minerva Next Generation Open Source Language Model](/Minerva-banner.png) -->

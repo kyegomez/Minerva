@@ -24,7 +24,11 @@ def prep_sample(sample):
     question_id = sample["question_id"]
     image = sample["image"]
 
-    text = f"Question: {question} Multiple Choice Answer: {multiple_choice_answer} Answers: {answers} Answer Type: {answer_type} Question ID: {question_id} Image ID: {image_id}"
+    text = (
+        f"Question: {question} Multiple Choice Answer:"
+        f" {multiple_choice_answer} Answers: {answers} Answer Type:"
+        f" {answer_type} Question ID: {question_id} Image ID: {image_id}"
+    )
 
     return {"image": image, "target_text": text}
 
@@ -32,7 +36,9 @@ def prep_sample(sample):
 def main(args):
     tokenizer = PALME_Tokenizer()
 
-    train_dataset = load_dataset(CFG.DATASET_NAME, split="train", streaming=True)
+    train_dataset = load_dataset(
+        CFG.DATASET_NAME, split="train", streaming=True
+    )
 
     # def tokenize_function(example):
     #     return tokenizer([t + tokenizer.eos_token for t in example["text"]])
@@ -54,7 +60,9 @@ def main(args):
             text = prepared_sample["target_text"]
             image = prepared_sample["image"]
 
-            text_tokens, _ = tokenizer.tokenize_texts([text + tokenizer.eos_token])
+            text_tokens, _ = tokenizer.tokenize_texts(
+                [text + tokenizer.eos_token]
+            )
             image_tokens = tokenizer.tokenize_images([image])
 
             # Since both text and image tokens are tensors, concatenate them along the sequence dimension.
@@ -70,7 +78,9 @@ def main(args):
             total_length = (total_length // CFG.SEQ_LEN) * CFG.SEQ_LEN
 
         # Split by chunks of block_size.
-        result = [t[i : i + CFG.SEQ_LEN] for i in range(0, total_length, CFG.SEQ_LEN)]
+        result = [
+            t[i : i + CFG.SEQ_LEN] for i in range(0, total_length, CFG.SEQ_LEN)
+        ]
         return result
 
     train_tokenized_dataset = train_dataset.map(
@@ -86,7 +96,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Process and push dataset to Hugging Face Hub"
     )
-    parser.add_argument("--seed", type=int, default=CFG.SEED, help="Random seed")
+    parser.add_argument(
+        "--seed", type=int, default=CFG.SEED, help="Random seed"
+    )
     parser.add_argument(
         "--seq_len",
         type=int,
@@ -100,7 +112,10 @@ if __name__ == "__main__":
         help="Hugging Face account name and repo",
     )
     parser.add_argument(
-        "--tokenizer", type=str, default=CFG.TOKENIZER, help="Tokenizer model to use"
+        "--tokenizer",
+        type=str,
+        default=CFG.TOKENIZER,
+        help="Tokenizer model to use",
     )
     parser.add_argument(
         "--dataset_name",

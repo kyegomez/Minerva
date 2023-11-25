@@ -1,45 +1,27 @@
 [tool.poetry]
-name = "zetascale"
+name = "minerva"
 version = "0.8.6"
 description = "Transformers at zeta scales"
 authors = ["Zeta Team <kye@apac.ai>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/kyegomez/zeta"
+homepage = "https://github.com/kyegomez/Minerva"
 keywords = ["Transformers", "zeta scale"]
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
 packages = [
-    { include = "zeta" },
-    { include = "zeta/**/*.py" },
+    { include = "minerva" },
+    { include = "minerva/**/*.py" },
 ]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 torch = "*"
-fairscale = "*"
-timm = "*"
-torchdiffeq = "*"
-pytest = "*"
-einops = "*"
-bitsandbytes = "*"
-typing = "*"
-transformers = "*"
-einops-exts = "*"
-torchvision = "*"
+zetascale = "*"
 accelerate = "*"
-datasets = "*"
-lion-pytorch = "*"
-sentencepiece = "*"
-colt5-attention = "0.10.14"
-vector-quantize-pytorch = "1.10.4"
-tokenmonster = "*"
-scipy = "*"
-beartype = "*"
-tiktoken = "*"
-tqdm = "*"
-rich = "*"
+transformers = "*"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
