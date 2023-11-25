@@ -1,8 +1,3 @@
-
-
-# Minerv
-Minerva is an state-of-the-art Language and Logic Model (LLM) developed by Google. Inspired by the wisdom of advanced mathematicians and logicians, Minerva combines their timeless insights with the power of modern technology to revolutionize the field of mathematics.
-
 ![Minerva Banner](minerva-banner.png)
 
 [Join our Minerva Discord and contribute to this project or explore other mathematical wonders!](https://discord.gg/qUtxnK2NMf)
@@ -37,14 +32,14 @@ Minerva is a groundbreaking language model that pushes the boundaries of mathema
 # Install
 
 ```shell
-pip install Minerva-llm
+pip install minerva
 ```
 
 
 # Usage
 ```python
 import torch
-from Minerva import Minerva, Train
+from minerva import Minerva, Train
 
 # Example usage
 x = torch.randint(0, 20000, (1, 1024))
@@ -53,30 +48,6 @@ Minerva(x)
 
 # or train
 Train()
-```
-
-## Method 2: Cloning the Repository
-
-To get started with Method 2, follow these steps:
-
-1. Clone the Minerva repository and navigate to the project directory:
-
-```shell
-git clone https://github.com/kyegomez/Minerva
-cd Minerva
-```
-
-2. Install the required packages:
-
-```shell
-pip3 install -r requirements.txt
-```
-
-3. Run the training script:
-
-```shell
-cd Minerva
-python3 training_distributed.py
 ```
 
 # Training
@@ -108,21 +79,6 @@ To build a custom dataset for Minerva, you can preprocess the data using the `bu
 The mathematical web pages and arXiv datasets focus on technical and mathematical content. The general natural language data provides a broad coverage of general language.
 
 The paper states the mathematical web pages and arXiv each account for 47.5% of the total data. The remaining 5% is general natural language data which is a subset of what was used for PaLM pretraining.
-
-```shell
-
-3 Minerva/build_dataset.py --seed 42 --seq_len 8192 --hf_account "HUGGINGFACE APIKEY" --tokenizer "EleutherAI/gpt-neox-20b" --dataset_name "EleutherAI/the_pile_deduplicated"
-```
-
-# Inference
-
-To perform inference with Minerva, use the `inference.py` script. Here's an example command:
-
-```shell
-python3 inference.py "My dog is very cute" --seq_len 256 --temperature 0.8 --filter_thres 0.9 --model "Minerva"
-```
-
-Please note that the Minerva model is not yet available on the PyTorch Hub, but we are actively working on making it accessible for easy integration into your projects.
 
 ## Roadmap 🗺️📍
 
