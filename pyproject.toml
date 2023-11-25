@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "minerva"
-version = "0.8.6"
+name = "minerva-torch"
+version = "0.0.1"
 description = "Transformers at zeta scales"
 authors = ["Zeta Team <kye@apac.ai>"]
 license = "MIT"

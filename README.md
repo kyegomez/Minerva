@@ -28,7 +28,7 @@ Minerva is a groundbreaking language model that pushes the boundaries of mathema
 # Install
 
 ```shell
-pip install minerva
+pip install minerva-torch
 ```
 
 
