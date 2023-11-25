@@ -17,7 +17,10 @@ from accelerate.utils import InitProcessGroupKwargs
 from datasets import concatenate_datasets, load_dataset
 from palm_rlhf_pytorch.palm import LayerNorm, ParallelTransformerBlock
 from torch.distributed.algorithms._checkpoint.checkpoint_wrapper import (
-    CheckpointImpl, apply_activation_checkpointing, checkpoint_wrapper)
+    CheckpointImpl,
+    apply_activation_checkpointing,
+    checkpoint_wrapper,
+)
 
 from torch.distributed.fsdp.wrap import (
     transformer_auto_wrap_policy,
@@ -26,17 +29,21 @@ from torch.distributed.fsdp.wrap import (
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from transformers import (default_data_collator,
-                          get_cosine_schedule_with_warmup,
-                          get_linear_schedule_with_warmup, set_seed)
+from transformers import (
+    default_data_collator,
+    get_cosine_schedule_with_warmup,
+    get_linear_schedule_with_warmup,
+    set_seed,
+)
 
 # from PaLM.palm.stable_adamw import StableAdamWUnfused
-from stable_adamw import StableAdamWUnfused
+from zeta.optim import StableAdamWUnfused
 
 # from palm.utils import print_num_params
 from utils import print_num_params
 
 from model import PALME, PALME_Tokenizer
+
 # constants
 from accelerate import Accelerator
 
@@ -77,8 +84,10 @@ def activation_checkpointing(
     """
     if accelerator is not None:
         accelerator.print("Using activation checkpointing")
+
     def check_fn(submodule):
         return isinstance(submodule, ParallelTransformerBlock)
+
     non_reentrant_wrapper = partial(
         checkpoint_wrapper,
         offload_to_cpu=offload_to_cpu,
@@ -156,7 +165,7 @@ def fsdp(
         )
 
     if shard_strat == "SHARD_GRAD":
-        sharding_strat_fsdp = ShardingStrategy.SHARD_GRAD_OP 
+        sharding_strat_fsdp = ShardingStrategy.SHARD_GRAD_OP
     elif shard_strat == "FULL_SHARD":
         sharding_strat_fsdp = ShardingStrategy.FULL_SHARD
     elif shard_strat == "NO_SHARD":
@@ -351,15 +360,17 @@ def decoupled_optimizer(
     ]
 
     # Create a variable called optimizer that stores an instance of the optimizer.
-    if optimizer_type == "lion":
-        optimizer = Lion(grouped_params, lr=learning_rate, betas=(beta_1, beta_2),)
-    elif optimizer_type == "adamw":
-        optimizer = AdamW(grouped_params, lr=learning_rate, betas=(beta_1, beta_2),)
-    elif optimizer_type == "deepspeed":
-        optimizer = DummyOptim(grouped_params, lr=learning_rate, betas=(beta_1, beta_2),)
+    if optimizer_type == "adamw":
+        optimizer = AdamW(
+            grouped_params,
+            lr=learning_rate,
+            betas=(beta_1, beta_2),
+        )
     elif optimizer_type == "stable_adamw":
         optimizer = StableAdamWUnfused(
-            grouped_params, lr=learning_rate, betas=(beta_1, beta_2),
+            grouped_params,
+            lr=learning_rate,
+            betas=(beta_1, beta_2),
         )
     else:
         raise ValueError(
@@ -378,7 +389,16 @@ def decoupled_optimizer(
 def build_dataloaders():
     tokenizer = PALME_Tokenizer.tokenize()
     dataset = load_dataset("HuggingFaceM4/VQAv2", split="train", streaming=True)
-    remove_columns = ['question_type', 'multiple_choice_answer', 'answers', 'image_id', 'answer_type', 'question_id', 'question', 'image']
+    remove_columns = [
+        "question_type",
+        "multiple_choice_answer",
+        "answers",
+        "image_id",
+        "answer_type",
+        "question_id",
+        "question",
+        "image",
+    ]
 
     tokenized_dataset = dataset.map(
         lambda example: tokenizer([t + tokenizer.eos_token for t in example["text"]]),
@@ -406,13 +426,15 @@ def build_dataloaders():
         return result
 
     train_dataset = tokenized_dataset.map(
-        group_texts, batched=True, num_proc=CFG.NUM_CPU,
+        group_texts,
+        batched=True,
+        num_proc=CFG.NUM_CPU,
     )
 
     return train_dataset
 
 
-#doesn't work
+# doesn't work
 def build_pre_tokenized():
     d0 = load_dataset("conceptofmind/c4_0-to-20_neox_with_eos_8k", split="train")
     d1 = load_dataset("conceptofmind/c4_21-to-40_neox_with_eos_8k", split="train")
@@ -465,11 +487,7 @@ def main():
     #######
 
     if CFG.USE_FSDP:
-        model = fsdp(
-            model,
-            mp="bf16",
-            shard_strat="SHARD_GRAD"
-        )
+        model = fsdp(model, mp="bf16", shard_strat="SHARD_GRAD")
 
     if CFG.USE_ACTIVATION_CHECKPOINTING:
         activation_checkpointing(model, accelerator)
@@ -484,20 +502,22 @@ def main():
         train_dataset = build_dataloaders()
 
     train_loader = DataLoader(
-        train_dataset, batch_size=CFG.BATCH_SIZE, collate_fn=default_data_collator,
+        train_dataset,
+        batch_size=CFG.BATCH_SIZE,
+        collate_fn=default_data_collator,
     )
 
     # optimizer
 
     optim = decoupled_optimizer(
         model=model,
-        learning_rate=CFG.LEARNING_RATE, 
-        weight_decay=CFG.WEIGHT_DECAY, 
-        beta_1=0.90, 
-        beta_2=0.95, 
-        optimizer_type='deepspeed',  
+        learning_rate=CFG.LEARNING_RATE,
+        weight_decay=CFG.WEIGHT_DECAY,
+        beta_1=0.90,
+        beta_2=0.95,
+        optimizer_type="deepspeed",
         use_fsdp=False,
-        accelerator=accelerator
+        accelerator=accelerator,
     )
 
     # Determine number of training steps
@@ -509,7 +529,6 @@ def main():
 
     NUM_WARMUP_STEPS = int(max_train_steps * 0.01)
     accelerator.print(f"Num warmup steps: {NUM_WARMUP_STEPS}")
-
 
     lr_scheduler = get_lr_scheduler_with_warmup(
         optimizer=optim,
@@ -558,7 +577,7 @@ def main():
         # need to multiply `gradient_accumulation_steps` to reflect real steps
         resume_step = (
             int(training_difference.replace("step_", ""))
-            #* CFG.GRADIENT_ACCUMULATE_EVERY
+            # * CFG.GRADIENT_ACCUMULATE_EVERY
         )
 
     if CFG.RESUME_FROM_CHECKPOINT and resume_step is not None:

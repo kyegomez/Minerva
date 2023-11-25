@@ -5,6 +5,7 @@ from datasets import load_dataset
 from model import PALME_Tokenizer
 import torch
 
+
 class CFG:
     SEED: int = 42
     SEQ_LEN: int = 8192
@@ -12,7 +13,6 @@ class CFG:
     HF_ACCOUNT_REPO: str = "YOUR HF ACCOUNT"
     TOKENIZER: str = "EleutherAI/gpt-neox-20b"
     DATASET_NAME: str = "EleutherAI/the_pile_deduplicated"
-
 
 
 def prep_sample(sample):
@@ -25,12 +25,8 @@ def prep_sample(sample):
     image = sample["image"]
 
     text = f"Question: {question} Multiple Choice Answer: {multiple_choice_answer} Answers: {answers} Answer Type: {answer_type} Question ID: {question_id} Image ID: {image_id}"
-    
-    return {
-        "image": image,
-        "target_text": text
-    }
 
+    return {"image": image, "target_text": text}
 
 
 def main(args):
@@ -72,7 +68,7 @@ def main(args):
         total_length = len(concatenated_examples)
         if total_length >= CFG.SEQ_LEN:
             total_length = (total_length // CFG.SEQ_LEN) * CFG.SEQ_LEN
-        
+
         # Split by chunks of block_size.
         result = [t[i : i + CFG.SEQ_LEN] for i in range(0, total_length, CFG.SEQ_LEN)]
         return result
@@ -82,16 +78,35 @@ def main(args):
         batched=True,
         # num_proc=CFG.NUM_CPU,
     )
-    
 
     train_tokenized_dataset.push_to_hub(CFG.HF_ACCOUNT_REPO)
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Process and push dataset to Hugging Face Hub")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Process and push dataset to Hugging Face Hub"
+    )
     parser.add_argument("--seed", type=int, default=CFG.SEED, help="Random seed")
-    parser.add_argument("--seq_len", type=int, default=CFG.SEQ_LEN, help="Sequence length for processing")
-    parser.add_argument("--hf_account", type=str, default=CFG.HF_ACCOUNT_REPO, help="Hugging Face account name and repo")
-    parser.add_argument("--tokenizer", type=str, default=CFG.TOKENIZER, help="Tokenizer model to use")
-    parser.add_argument("--dataset_name", type=str, default=CFG.DATASET_NAME, help="Name of the dataset to process")
+    parser.add_argument(
+        "--seq_len",
+        type=int,
+        default=CFG.SEQ_LEN,
+        help="Sequence length for processing",
+    )
+    parser.add_argument(
+        "--hf_account",
+        type=str,
+        default=CFG.HF_ACCOUNT_REPO,
+        help="Hugging Face account name and repo",
+    )
+    parser.add_argument(
+        "--tokenizer", type=str, default=CFG.TOKENIZER, help="Tokenizer model to use"
+    )
+    parser.add_argument(
+        "--dataset_name",
+        type=str,
+        default=CFG.DATASET_NAME,
+        help="Name of the dataset to process",
+    )
     args = parser.parse_args()
     main(args)

@@ -1,10 +1,6 @@
-# READY FOR TRAINING
-
-* We need the datasets from the minerva paper
 
 
-
-# Minerva the MATH LLM from Google
+# Minerv
 Minerva is an state-of-the-art Language and Logic Model (LLM) developed by Google. Inspired by the wisdom of advanced mathematicians and logicians, Minerva combines their timeless insights with the power of modern technology to revolutionize the field of mathematics.
 
 ![Minerva Banner](minerva-banner.png)
@@ -37,19 +33,15 @@ Minerva is a groundbreaking language model that pushes the boundaries of mathema
 
 
 
-# Usage
-There are two methods to use Minerva: one by installing via `pip` and the other by cloning the repository. For detailed instructions, please refer to the [Training SOP](DOCs/TRAINING.md).
 
-# Method 1: Installation via `pip`
-
-First, install Minerva by running the following command:
+# Install
 
 ```shell
 pip install Minerva-llm
 ```
 
-Then, you can utilize Minerva in your Python code as shown below:
 
+# Usage
 ```python
 import torch
 from Minerva import Minerva, Train
@@ -118,7 +110,6 @@ The mathematical web pages and arXiv datasets focus on technical and mathematica
 The paper states the mathematical web pages and arXiv each account for 47.5% of the total data. The remaining 5% is general natural language data which is a subset of what was used for PaLM pretraining.
 
 ```shell
-python
 
 3 Minerva/build_dataset.py --seed 42 --seq_len 8192 --hf_account "HUGGINGFACE APIKEY" --tokenizer "EleutherAI/gpt-neox-20b" --dataset_name "EleutherAI/the_pile_deduplicated"
 ```
@@ -135,24 +126,4 @@ Please note that the Minerva model is not yet available on the PyTorch Hub, but 
 
 ## Roadmap 🗺️📍
 
-1. **Training phase**: Train Minerva on a large-scale dataset to achieve state-of-the-art performance in various mathematical tasks and problem-solving.
-
-2. **World-class inference infrastructure**: Establish a robust and efficient infrastructure for Minerva, incorporating techniques such as model quantization, distillation, and optimized serving frameworks. This ensures rapid and accurate mathematical inference.
-
-3. **Continuous improvement**: Continuously fine-tune and expand Minerva's capabilities by incorporating new mathematical knowledge and adapting to emerging challenges and domains.
-
-4. **Community-driven development**: Foster an open-source community around Minerva, encouraging contributions, improvements, and innovative use cases from mathematicians, researchers, and enthusiasts.
-
-## Why Minerva? 🌠💡
-
-Minerva sets itself apart with its unique advanced-themed approach, combining the wisdom of advanced mathematicians with modern deep learning techniques. Here are some reasons to choose Minerva:
-
-- **Efficiency**: Minerva incorporates cutting-edge optimization techniques inspired by advanced mathematical principles, resulting in efficient training and inference.
-
-- **Flexibility**: With its modular design, Minerva can adapt to various mathematical tasks and domains, making it a versatile choice for a wide range of applications.
-
-- **Scalability**: Minerva's architecture is designed to scale with the ever-growing computational resources and data sizes, ensuring its continuous relevance in the world of mathematics.
-
-- **Community-driven**: As an open-source project, Minerva thrives on contributions from the community, fostering collaboration, innovation, and continuous improvement.
-
-Join us on this exciting journey to unlock the secrets of advanced mathematics and revolutionize the way we approach mathematical problem-solving! 🚀🌟
+- [ ] Create a dataset of ARXVIV papers
