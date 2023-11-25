@@ -34,16 +34,16 @@ pip install minerva-torch
 
 # Usage
 ```python
-import torch
-from minerva import Minerva, Train
+import torch 
+from minerva.model import Minerva
 
-# Example usage
-x = torch.randint(0, 20000, (1, 1024))
+# Usage with random inputs
+text = torch.randint(0, 20000, (1, 1024))
 
-Minerva(x)
-
-# or train
-Train()
+# Initiliaze the model
+model = Minerva()
+output = model(text)
+print(output)
 ```
 
 # Training
